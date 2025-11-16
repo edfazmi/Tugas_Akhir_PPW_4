@@ -10,17 +10,17 @@ function get_initial_dummy_contacts() {
     return [
         [
             'id' => 'contact_' . uniqid(),
-            'nama' => 'Budi Santoso (Dummy)',
-            'email' => 'budi@example.com',
+            'nama' => 'M. Azmi',
+            'email' => 'azmi@edfa.com',
             'telepon' => '081234567890',
-            'alamat' => 'Jl. Merdeka No. 1, Jakarta'
+            'alamat' => 'Jl. Durian, Bandar Lampung'
         ],
         [
             'id' => 'contact_' . uniqid(),
-            'nama' => 'Siti Aminah (Dummy)',
-            'email' => 'siti@example.com',
+            'nama' => 'Edfa Alhafizh',
+            'email' => 'edfa@edfa.com',
             'telepon' => '089876543210',
-            'alamat' => 'Jl. Pahlawan No. 10, Bandung'
+            'alamat' => 'Jl. Mangga, Bandar Lampung'
         ]
     ];
 }

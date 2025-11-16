@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
         
         <p class="text-center text-gray-500 mt-6 text-sm">
-            Gunakan akun dummy: <br> User: <span class="font-medium text-gray-700">edfa</span> / Pass: <span class="font-medium text-gray-700">admin123</span>
+            Gunakan akun : <br> User: <span class="font-medium text-gray-700">edfa</span> / Pass: <span class="font-medium text-gray-700">admin123</span>
         </p>
     </div>
 </div>
