@@ -1,148 +1,142 @@
-EdfaContact - Sistem Manajemen Kontak Sederhana
+# EdfaContact --- Sistem Manajemen Kontak Sederhana
 
-EdfaContact adalah aplikasi web PHP murni (naitf) yang dirancang untuk mendemonstrasikan fungsionalitas Manajemen Kontak (CRUD) dan Manajemen Sesi (Session Management) secara komprehensif tanpa bergantung pada database eksternal.
+EdfaContact adalah aplikasi web ringan yang dirancang untuk mempermudah
+pengelolaan kontak melalui antarmuka yang bersih, modern, dan responsif.
+Menggunakan PHP native dan Tailwind CSS, aplikasi ini menyediakan fitur
+CRUD kontak lengkap dengan sistem login sederhana berbasis session.
 
-Aplikasi ini sengaja dibuat untuk menyoroti bagaimana data (status login dan data kontak) dapat dikelola sepenuhnya di dalam $_SESSION PHP, menjadikannya studi kasus yang sangat baik untuk memahami siklus hidup sesi dan penyimpanan data sementara di sisi server.
+------------------------------------------------------------------------
 
-Fitur Utama
+## ✨ Fitur Utama
 
-Sistem Login: Menggunakan data dummy (hardcoded) untuk autentikasi.
+-   **Sistem Login (Dummy Authentication)**\
+    Login menggunakan kredensial yang ditentukan secara hardcoded.
 
-Perlindungan Halaman (Session Guard): Hanya pengguna yang sudah login yang dapat mengakses halaman manajemen kontak.
+-   **Session Guard (Proteksi Halaman)**\
+    Hanya pengguna yang sudah login yang dapat mengakses halaman kontak.
 
-CRUD Kontak Penuh:
+-   **CRUD Kontak Lengkap**
 
-Create: Menambah kontak baru (disimpan ke session).
+    -   **Create** → Tambah kontak baru (disimpan di session)\
+    -   **Read** → Tampilkan daftar kontak\
+    -   **Update** → Edit informasi kontak\
+    -   **Delete** → Hapus kontak yang tidak diperlukan
 
-Read: Menampilkan semua kontak (dibaca dari session).
+-   **Pencarian Kontak Real-Time**\
+    Pencarian cepat terhadap data kontak yang tersimpan di session.
 
-Update: Mengedit kontak yang ada (diperbarui di session).
+-   **Manajemen Sesi Lengkap**\
+    Login, aktivitas session, dan logout yang jelas dan terkendali.
 
-Delete: Menghapus kontak (dihapus dari session).
+-   **Data Non-Permanen**\
+    Semua data kontak akan kembali ke data dummy setelah logout.
 
-Pencarian Kontak: Fitur pencarian real-time (pada data di session).
+------------------------------------------------------------------------
 
-Manajemen Sesi: Siklus hidup login, aktivitas, dan logout yang jelas.
+## 🛠️ Teknologi yang Digunakan
 
-Data Volatile: Semua data kontak kembali ke data dummy awal setelah pengguna logout.
+-   **Backend:** PHP 
+-   **Frontend:** HTML5
+-   **UI:** Tailwind CSS
+-   **Storage:** PHP Session (`$_SESSION`)
 
-Teknologi yang Digunakan
+------------------------------------------------------------------------
 
-Backend: PHP 8+ (Natif, tanpa framework)
+## 📁 Struktur Direktori
 
-Frontend: HTML5
+    edfacontact/
+    │
+    ├── index.php         # Halaman utama 
+    ├── login.php         # Form login
+    ├── logout.php        # Proses logout & destroy session
+    ├── tambah.php        # Form tambah kontak
+    ├── edit.php          # Form edit kontak
+    ├── hapus.php         # Konfirmasi hapus kontak
+    │
+    └── includes/
+        ├── config.php    # Konfigurasi utama (session_start)
+        ├── auth.php      # Autentikasi & session guard
+        ├── functions.php # Fungsi CRUD menggunakan $_SESSION
+        ├── header.php    # Template header + navbar
+        └── footer.php    # Template footer
 
-Styling: Tailwind CSS (Dimuat melalui CDN untuk kesederhanaan)
+------------------------------------------------------------------------
 
-Struktur File
+## 🚀 Cara Menjalankan
 
-Struktur proyek ini dijaga agar tetap minimalis dan mudah dipahami, dengan pemisahan yang jelas antara logika, template, dan halaman.
+1.  Pastikan memiliki server lokal seperti **XAMPP**.
+2.  Salin folder **edfacontact** ke direktori:
+    -   XAMPP → `htdocs/`
+    -   WAMP → `www/`
+3.  Buka browser dan akses:\
+    **http://localhost/edfacontact/**
+4.  Anda akan diarahkan ke halaman login.
+5.  Gunakan kredensial berikut:
 
-edfacontact/
-│
-├── index.php         (Halaman utama, menampilkan daftar kontak)
-├── login.php         (Halaman form login)
-├── logout.php        (Skrip untuk menghancurkan sesi/logout)
-├── tambah.php        (Halaman form untuk menambah kontak baru)
-├── edit.php          (Halaman form untuk mengedit kontak)
-├── hapus.php         (Halaman konfirmasi untuk menghapus kontak)
-│
-└── includes/
-    ├── config.php    (File konfigurasi inti, memulai session_start())
-    ├── auth.php      (Logika autentikasi & proteksi sesi/guard)
-    ├── functions.php (Semua fungsi CRUD kontak yang bera-interaksi dengan $_SESSION)
-    ├── header.php    (Template HTML bagian atas, termasuk navbar)
-    └── footer.php    (Template HTML bagian bawah)
+```{=html}
+<!-- -->
+```
+    Username : edfa
+    Password : admin123
 
+------------------------------------------------------------------------
 
-Cara Menjalankan
+## 🧠 Arsitektur Manajemen Sesi (Inti Aplikasi)
 
-Pastikan Anda memiliki server lokal seperti XAMPP atau WAMP yang menjalankan PHP.
+Aplikasi EdfaContact tidak menggunakan database.\
+Session (`$_SESSION`) bertindak sebagai *database sementara* selama
+pengguna aktif.
 
-Salin folder edfacontact (beserta semua isinya) ke dalam direktori htdocs (di XAMPP) atau www (di WAMP).
+------------------------------------------------------------------------
 
-Buka browser Anda dan navigasikan ke http://localhost/edfacontact/.
+### 1. Inisiasi Session (`includes/config.php`)
 
-Anda akan otomatis diarahkan ke halaman login.
+Semua halaman yang berhubungan dengan session memanggil
+`session_start()`.\
+File `config.php` dipanggil melalui `header.php`, sehingga session aktif
+di seluruh halaman.
 
-Gunakan kredensial dummy berikut untuk masuk:
+------------------------------------------------------------------------
 
-Username: edfa
+### 2. Login & Pembuatan Data Session
 
-Password: admin123
+Saat login berhasil:
 
-Penjelasan Lengkap: Arsitektur Manajemen Sesi (Pusat Aplikasi)
+Menandai user sebagai login:
 
-Ini adalah bagian terpenting dari proyek ini. Aplikasi ini tidak menggunakan database. Session ($_SESSION) bertindak sebagai database sementara di sisi server.
+    $_SESSION['user_id'] = $username;
 
-Berikut adalah siklus hidup lengkap dari sesi di aplikasi EdfaContact:
+Inisialisasi data kontak dummy:
 
-1. Inisiasi Sesi (File: includes/config.php)
+    $_SESSION['contacts'] = get_initial_dummy_contacts();
 
-Setiap interaksi dengan session wajib diawali dengan session_start();.
+------------------------------------------------------------------------
 
-Bagaimana: Perintah session_start(); ditempatkan di includes/config.php.
+### 3. Proteksi Halaman
 
-Kenapa: File config.php ini kemudian dipanggil oleh includes/header.php. Karena header.php di-include di setiap halaman (index.php, login.php, dll.), ini memastikan bahwa sesi selalu aktif dan siap digunakan di seluruh bagian aplikasi.
+-   `is_logged_in()` → mengecek apakah user sudah login\
+-   `force_login()` → redirect jika belum login
 
-2. Pembuatan Sesi & Penyimpanan Data (Saat Login - includes/auth.php)
+------------------------------------------------------------------------
 
-Saat pengguna berhasil login menggunakan akun dummy (edfa/admin123), dua hal penting terjadi di dalam fungsi login_user():
+### 4. CRUD Kontak via Session
 
-Pencatatan Autentikasi:
+Semua operasi dilakukan pada:
 
-$_SESSION['user_id'] = $username;
+    $_SESSION['contacts']
 
+Contoh Create:
 
-Ini adalah "KTP" atau "tiket masuk" pengguna. Kami membuat variabel session bernama user_id. Adanya variabel ini adalah bukti bahwa pengguna tersebut sudah sah login.
+    $contacts = $_SESSION['contacts'];
+    $contacts[] = $data;
+    $_SESSION['contacts'] = $contacts;
 
-Inisialisasi Data:
+------------------------------------------------------------------------
 
-$_SESSION['contacts'] = get_initial_dummy_contacts();
+### 5. Logout & Penghancuran Session
 
+    session_destroy();
 
-Di sinilah keajaiban terjadi. Kami membuat variabel session kedua bernama contacts. Kami mengisinya dengan array data kontak dummy. Mulai saat ini, $_SESSION['contacts'] bertindak sebagai "tabel kontak" kami.
+Semua data session hilang, termasuk `contacts` dan `user_id`.
 
-3. Proteksi Halaman (Penjaga Sesi - includes/auth.php)
-
-Kami tidak ingin orang yang belum login mengakses index.php. Untuk ini, kami menggunakan "Session Guard".
-
-Fungsi is_logged_in(): Fungsi ini hanya memeriksa: isset($_SESSION['user_id']). Jika "KTP" ada, ia mengembalikan true.
-
-Fungsi force_login(): Fungsi ini adalah penjaganya. Ia memanggil is_logged_in(). Jika hasilnya false, ia akan langsung mengalihkan pengguna kembali ke login.php.
-
-Penerapan: force_login() dipanggil di baris paling atas dari setiap halaman yang perlu dilindungi (index.php, tambah.php, edit.php, hapus.php).
-
-4. Manipulasi Data Sesi (CRUD - includes/functions.php)
-
-Semua fungsi CRUD (Create, Read, Update, Delete) di file ini tidak berbicara dengan database SQL, melainkan langsung memanipulasi array $_SESSION['contacts'].
-
-get_user_contacts():
-
-Bukan: SELECT * FROM contacts
-
-Tapi: return $_SESSION['contacts'] ?? []; (Langsung ambil data dari session)
-
-add_contact($data):
-
-$contacts = $_SESSION['contacts']; (Ambil array data saat ini)
-
-$contacts[] = $data; (Tambahkan data baru ke array)
-
-$_SESSION['contacts'] = $contacts; (Simpan kembali array yang sudah di-update ke session)
-
-update_contact($id, $data) dan delete_contact($id):
-
-Logikanya sama: ambil array $_SESSION['contacts'], lakukan perulangan (loop) untuk mencari ID yang sesuai, ubah atau hapus item tersebut dari array, lalu simpan kembali array yang sudah dimodifikasi ke $_SESSION['contacts'].
-
-5. Penghancuran Sesi (Saat Logout - logout.php)
-
-Saat pengguna mengklik "Logout", file logout.php dieksekusi.
-
-Kode: session_destroy();
-
-Apa yang terjadi: Perintah ini memberi tahu server untuk menghapus semua data yang terkait dengan sesi pengguna ini.
-
-Hasil: $_SESSION['user_id'] hilang (pengguna tidak lagi login) dan $_SESSION['contacts'] juga ikut hilang (semua data kontak yang telah ditambah/edit/hapus akan musnah).
-
-Inilah sebabnya mengapa data selalu "reset" kembali ke data dummy awal saat Anda login kembali, karena login_user() akan membuat $_SESSION['contacts'] yang baru lagi dari awal.
+------------------------------------------------------------------------
