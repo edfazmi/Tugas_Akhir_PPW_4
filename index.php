@@ -27,7 +27,6 @@ if (!empty($search_query)) {
 <div class="bg-white p-6 rounded-xl shadow-lg">
     <div class="flex flex-col sm:flex-row justify-between sm:items-center mb-6 gap-4">
         <h1 class="text-3xl font-bold text-gray-800">Daftar Kontak Anda</h1>
-\
         <form action="index.php" method="GET" class="flex-1 max-w-sm">
             <div class="relative">
                 <input type="search" name="q" value="<?php echo htmlspecialchars($search_query); ?>"

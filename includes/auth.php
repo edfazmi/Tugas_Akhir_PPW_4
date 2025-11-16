@@ -3,9 +3,6 @@
 define('DUMMY_USERNAME', 'edfa');
 define('DUMMY_PASSWORD', 'admin123');
 
-/**
- * @return array
- */
 function get_initial_dummy_contacts() {
     return [
         [
@@ -25,11 +22,6 @@ function get_initial_dummy_contacts() {
     ];
 }
 
-/**
- * @param string $username
- * @param string $password
- * @return bool
- */
 function login_user($username, $password) {
     if ($username === DUMMY_USERNAME && $password === DUMMY_PASSWORD) {
         $_SESSION['user_id'] = $username;
@@ -40,16 +32,10 @@ function login_user($username, $password) {
     return false;
 }
 
-/**
- * @return bool
- */
 function is_logged_in() {
     return isset($_SESSION['user_id']);
 }
 
-/**
- * @return string|null
- */
 function get_current_user_id() {
     return $_SESSION['user_id'] ?? null;
 }
